@@ -33,6 +33,9 @@
         --background-light: #fff9f4;
         --background-yellow: #f9df8a;
       }
+      html {
+        scroll-behavior: smooth;
+        }
     </style>
   </head>
   <body class="font-siliguri relative">
@@ -50,7 +53,7 @@
           <div class="flex-none">
             <ul class="flex gap-5 menu menu-horizontal px-1">
               <li class="btn btn-outline btn-primary group">
-                <a> <i class="fa-solid fa-circle-question text-indigo-800 group-hover:text-white"></i> FAQ</a>
+                <a href="#faq"> <i class="fa-solid fa-circle-question text-indigo-800 group-hover:text-white"></i> FAQ</a>
               </li>
               <li class="btn btn-outline btn-primary group">
                 <a href=""> <i class="fa-solid fa-book-open text-indigo-800 group-hover:text-white"></i> Learn</a>
@@ -81,5 +84,38 @@
             </div>
        </section>
     </header>
+    <main>
+      <!-- faq section -->
+      <section id="faq" class="space-y-10 w-11/12 mx-auto">
+        <h2 class="text-3xl font-extrabold ps-5 text-center"><span class="text-sky-500">Frequently</span>Asked Questions</h2>
+        <!-- accordion -->
+        <div class="collapse collapse-plus bg-stone-100 border border-base-300">
+          <input type="radio" name="my-accordion-3" checked="checked" />
+          <div class="collapse-title font-semibold">1. The difference between var, let, and const</div>
+          <div class="collapse-content text-sm">var is function-scoped, can be redeclared. let is block-scoped, can't be redeclared. const is block-scoped, can't be reassigned.</div>
+        </div>
+        <div class="collapse collapse-plus bg-stone-100 border border-base-300">
+          <input type="radio" name="my-accordion-3" />
+          <div class="collapse-title font-semibold">2. The difference between map(), forEach(), and filter()</div>
+          <div class="collapse-content text-sm bg-stone-100">map() returns a new array. forEach() loops but doesn't return. filter() returns a new array with elements that pass a condition.</div>
+        </div>
+        <div class="collapse collapse-plus bg-stone-100 border border-base-300">
+          <input type="radio" name="my-accordion-3" />
+          <div class="collapse-title font-semibold">3. Explain arrow functions and how they are different from regular functions</div>
+          <div class="collapse-content text-sm">Arrow functions have a concise syntax, no this binding, can't be used as constructors. Regular functions have their own this and can be used with new. </div>
+        </div>
+        <div class="collapse collapse-plus bg-stone-100 border border-base-300">
+          <input type="radio" name="my-accordion-3" />
+          <div class="collapse-title font-semibold">4. How JavaScript Promises work</div>
+          <div class="collapse-content text-sm">Promises handle async operations with .then(), .catch(), and finally(), resolving or rejecting once done.</div>
+        </div>
+        <div class="collapse collapse-plus bg-stone-100 border border-base-300">
+          <input type="radio" name="my-accordion-3" />
+          <div class="collapse-title font-semibold">5. How closures work in JavaScript
+          </div>
+          <div class="collapse-content text-sm">A function retains access to its outer scope even after the outer function has finished executing.</div>
+        </div>
+      </section>
+    </main>
   </body>
 </html>
