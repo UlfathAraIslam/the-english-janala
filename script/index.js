@@ -43,6 +43,16 @@ navbar.style.display= "none";
 vocabulary.style.display = "none";
 faq.style.display = "none";
 })
+// show loader
+const showLoader=()=>{
+  document.getElementById("loader").classList.remove("hidden");
+  document.getElementById("words-container").classList.add("hidden");
+}
+// hide loader
+const hideLoader=()=>{
+  document.getElementById("loader").classList.add("hidden");
+  document.getElementById("words-container").classList.remove("hidden");
+}
 // remove active class
 function removeActiveClass(){
     const activeButtons = document.getElementsByClassName("active");
@@ -76,10 +86,13 @@ function displayLessons(lessons) {
 
 // loadWords all
 function loadWords() {
+  showLoader();
+  wordsContainer.innerHTML = "";
   fetch("https://openapi.programming-hero.com/api/words/all")
     .then((res) => res.json())
     .then((data) => {
       displayWords(data.data);
+      hideLoader();
     });
 }
 
@@ -97,6 +110,7 @@ function displayWords(words) {
             <p class="text-2xl font-medium">নেক্সট Lesson এ যান</p>
           </div>
     `
+    hideLoader();
     return;
   }
   words.forEach((word) => {
@@ -124,6 +138,7 @@ function displayWords(words) {
 }
 // selected Lesson Words
 const loadSelectedLessonWords=(id)=>{
+  showLoader();
     const url= `https://openapi.programming-hero.com/api/level/${id}`;
     fetch(url)
     .then((res)=>res.json())
@@ -132,6 +147,7 @@ const loadSelectedLessonWords=(id)=>{
         removeActiveClass();
         clickedButton.classList.add("active");
         displayWords(data.data);
+        hideLoader();
     })
 }
 // loadWordDetails
