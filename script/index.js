@@ -1,3 +1,8 @@
+//  hide everything on landing except the Banner and Footer
+document.getElementById("nav").style.display="none";
+document.getElementById("vocabulary").style.display="none";
+document.getElementById("faq").style.display="none";
+
 function removeActiveClass(){
     const activeButtons = document.getElementsByClassName("active");
     for(let btn of activeButtons){
@@ -147,4 +152,3 @@ const loadWordDetails=(wordId)=>{
 
     }
 loadLessons();
-// loadWords();
