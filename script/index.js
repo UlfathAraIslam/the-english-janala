@@ -19,16 +19,29 @@ getStartedBtn.addEventListener("click",function(event){
     const password = passwordInput.value;
 
     if(!username){
-        alert("Please enter your name");
+      Swal.fire({
+        title: "Error!",
+        text: "Please enter your name",
+        icon: "warning",
+        confirmButtonText: "OK"
+    });
         return;
     }
     if(password !== "123456"){
-        alert("Incorrect password!");
+      Swal.fire({
+        title: "Oops!",
+        text: "Incorrect password!",
+        icon: "error",
+        confirmButtonText: "Try Again"
+    });
         return;
     }
-    else{
-        alert("Login successful!")
-    }
+    Swal.fire({
+      title: "Welcome!",
+      text: "Login successful!",
+      icon: "success",
+      confirmButtonText: "Continue"
+  })
     banner.style.display = "none";
     navbar.style.display = "flex";
     vocabulary.style.display = "block";
