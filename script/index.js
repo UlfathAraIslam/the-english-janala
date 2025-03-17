@@ -89,11 +89,12 @@ function loadWords() {
 function displayWords(words) {
   const wordsContainer = document.getElementById("words-container");
   wordsContainer.innerHTML = '';
-  if(words.length == 0){
+  if(!words || words.length === 0){
     wordsContainer.innerHTML=`
-            <div class="col-span-full text-center space-y-5 bg-stone-100 p-5">
-            <p class="text-xs text-stone-600">এই lesson-এ এখনো কোনো vocbulary যোগ করা হয়নি</p>
-            <p class="text-2xl font-medium">Next lesson-এ যান।</p>
+            <div class="col-span-full flex flex-col justify-center items-center space-y-5 bg-stone-100 p-5">
+            <img src="./assets/alert-error.png" alt="">
+            <p class="text-xs text-stone-600">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
+            <p class="text-2xl font-medium">নেক্সট Lesson এ যান</p>
           </div>
     `
     return;
@@ -104,9 +105,9 @@ function displayWords(words) {
         <div class="card bg-base-100 shadow-sm h-full">
             <div class="card-body">
                 <div class='flex flex-col justify-center items-center space-y-2'>
-                <h2 class="card-title font-bold text-2xl">${word.word}</h2>
+                <h2 class="card-title font-bold text-2xl">${word.word || "অজানা শব্দ"}</h2>
                 <p>Meaning /Pronounciation</p>
-                <p class='font-semibold text-2xl'>''${word.meaning} /${word.pronunciation}''</p></div>
+                <p class='font-semibold text-2xl'>''${word.meaning || "অর্থ নেই"} /${word.pronunciation}''</p></div>
                 <div class="flex justify-between">
                     <button  onclick = loadWordDetails('${word.id}') class="p-2 bg-slate-200 text-white    rounded">
                     <i class="fas fa-info-circle text-slate-700"></i>
@@ -158,23 +159,23 @@ const loadWordDetails=(wordId)=>{
                 </div>
               `;
             } else {
-              return `<p>No synonyms available.</p>`;
+              return `<p>কোনো সমার্থক শব্দ পাওয়া যায়নি।</p>`;
             }
         }        
         wordDetailsContainer.innerHTML=`
         <div class="card bg-base-100 shadow-sm">
       <div class="card-body">
-        <h2 class="card-title text-2xl font-bold">${word.word}
-        <p class="text-xl font-medium"><span class="font-normal text-gray-700">(<i class="fas fa-microphone"></i>:${word.pronunciation})</span></p>
+        <h2 class="card-title text-2xl font-bold">${word.word || "অজানা শব্দ"}
+        <p class="text-xl font-medium"><span class="font-normal text-gray-700">(<i class="fas fa-microphone"></i>:${word.pronunciation || "উচ্চারণ পাওয়া যায়নি" })</span></p>
         </h2>
         <div>
         <p class="font-semibold text-lg">Meaning</p>
-        <p class="text-gray-700">${word.meaning}</p>
+        <p class="text-gray-700">${word.meaning || "অর্থ নেই"}</p>
         </div>
 
         <div class="my-4">
           <p class="font-semibold text-lg">Example</p>
-          <p>"${word.sentence || 'No example sentence available.'}"</p>
+          <p>"${word.sentence || 'কোনো উদাহরণ পাওয়া যায়নি।'}"</p>
         </div>
 
         <div class="my-4">
