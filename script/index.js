@@ -81,7 +81,6 @@ function loadLessons() {
       displayLessons(data.data);
     });
 }
-// {id: 101, level_no: 1, lessonName: 'Basic Vocabulary'}
 
 // displayLessons
 function displayLessons(lessons) {
@@ -108,8 +107,13 @@ function loadWords() {
       hideLoader();
     });
 }
+// pronounce
+function pronounceWord(word) {
+  const utterance = new SpeechSynthesisUtterance(word);
+  utterance.lang = 'en-US';
+  window.speechSynthesis.speak(utterance);
+}
 
-// {id: 1, level: 3, word: 'Abundant', meaning: null, pronunciation: 'অবানডান্ট'}
 
 // display all words
 function displayWords(words) {
@@ -139,7 +143,7 @@ function displayWords(words) {
                     <button  onclick = loadWordDetails('${word.id}') class="p-2 bg-slate-200 text-white    rounded">
                     <i class="fas fa-info-circle text-slate-700"></i>
                     </button>
-                    <button class="p-2 bg-slate-200 text-white rounded">
+                    <button onclick="pronounceWord('${word.word}')" class="p-2 bg-slate-200 text-white rounded">
                     <i class="fas fa-volume-up text-slate-700"></i>
                     </button>
                 </div>
