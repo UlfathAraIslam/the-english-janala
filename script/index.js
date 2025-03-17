@@ -36,6 +36,7 @@ function loadWords() {
       displayWords(data.data);
     });
 }
+
 // {id: 1, level: 3, word: 'Abundant', meaning: null, pronunciation: 'অবানডান্ট'}
 
 // display all words
@@ -61,7 +62,7 @@ function displayWords(words) {
                 <p>Meaning /Pronounciation</p>
                 <p class='font-semibold text-2xl'>''${word.meaning} /${word.pronunciation}''</p></div>
                 <div class="flex justify-between">
-                    <button class="p-2 bg-slate-200 text-white        rounded">
+                    <button  onclick = loadWordDetails('${word.id}') class="p-2 bg-slate-200 text-white    rounded">
                     <i class="fas fa-info-circle text-slate-700"></i>
                     </button>
                     <button class="p-2 bg-slate-200 text-white rounded">
@@ -86,5 +87,64 @@ const loadSelectedLessonWords=(id)=>{
         displayWords(data.data);
     })
 }
+// loadWordDetails
+const loadWordDetails=(wordId)=>{
+    const url = `https://openapi.programming-hero.com/api/word/${wordId}`;
+    fetch(url)
+    .then((res)=>res.json())
+    .then((data)=>{
+        displayWordDetails(data.data);
+    })
+    }
+
+    // display word details
+    const displayWordDetails = (word)=>{
+        document.getElementById("word_details").showModal();
+        const wordDetailsContainer = document.getElementById("word-details-container");
+        // load synonyms
+        const loadSynonyms = (synonyms)=>{
+            if (synonyms && synonyms.length > 0) {
+              return `
+                <div class="flex flex-wrap gap-2">
+                  ${synonyms.map(synonym => 
+                    `<button class="btn border text-sm font-thin text-gray-600 bg-sky-50">${synonym}</button>`
+                  ).join('')}
+                </div>
+              `;
+            } else {
+              return `<p>No synonyms available.</p>`;
+            }
+        }        
+        wordDetailsContainer.innerHTML=`
+        <div class="card bg-base-100 shadow-sm">
+      <div class="card-body">
+        <h2 class="card-title text-2xl font-bold">${word.word}
+        <p class="text-xl font-medium"><span class="font-normal text-gray-700">(<i class="fas fa-microphone"></i>:${word.pronunciation})</span></p>
+        </h2>
+        <div>
+        <p class="font-semibold text-lg">Meaning</p>
+        <p class="text-gray-700">${word.meaning}</p>
+        </div>
+
+        <div class="my-4">
+          <p class="font-semibold text-lg">Example</p>
+          <p>"${word.sentence || 'No example sentence available.'}"</p>
+        </div>
+
+        <div class="my-4">
+          <p class="font-semibold text-lg">সমার্থক শব্দ গুলো</p>
+          ${loadSynonyms(word.synonyms)}
+        </div>
+
+        <div class="card-actions">
+          <form method="dialog">
+            <button class="btn btn-primary">Complete Learning</button>
+          </form>
+        </div>
+      </div>
+    </div>
+        `
+
+    }
 loadLessons();
 // loadWords();
