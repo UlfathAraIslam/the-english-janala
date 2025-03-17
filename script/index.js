@@ -1,3 +1,9 @@
+function removeActiveClass(){
+    const activeButtons = document.getElementsByClassName("active");
+    for(let btn of activeButtons){
+        btn.classList.remove("active")
+    }
+}
 // loadLessons
 function loadLessons() {
   fetch("https://openapi.programming-hero.com/api/levels/all")
@@ -14,7 +20,7 @@ function displayLessons(lessons) {
   for (let lesson of lessons) {
     const lessonDiv = document.createElement("div");
     lessonDiv.innerHTML = `
-        <li onclick="loadSelectedLessonWords(${lesson.level_no})" class="btn btn-outline btn-primary group">
+        <li id="btn-${lesson.level_no}" onclick="loadSelectedLessonWords(${lesson.level_no})" class="btn btn-outline btn-primary group">
             <a href="#vocabulary"> <i class="fa-solid fa-book-open text-indigo-800 group-hover:text-white"></i> Lesson-${lesson.level_no}</a>
           </li>
         `;
@@ -38,11 +44,12 @@ function displayWords(words) {
   wordsContainer.innerHTML = '';
   if(words.length == 0){
     wordsContainer.innerHTML=`
-    <div class="col-span-full text-center space-y-5 bg-stone-100 p-5">
+            <div class="col-span-full text-center space-y-5 bg-stone-100 p-5">
             <p class="text-xs text-stone-600">এই lesson-এ এখনো কোনো vocbulary যোগ করা হয়নি</p>
             <p class="text-2xl font-medium">Next lesson-এ যান।</p>
           </div>
     `
+    return;
   }
   words.forEach((word) => {
     const wordCard = document.createElement("div");
@@ -70,10 +77,12 @@ function displayWords(words) {
 // selected Lesson Words
 const loadSelectedLessonWords=(id)=>{
     const url= `https://openapi.programming-hero.com/api/level/${id}`;
-    console.log(url);
     fetch(url)
     .then((res)=>res.json())
     .then((data)=>{
+        const clickedButton = document.getElementById(`btn-${id}`);
+        removeActiveClass();
+        clickedButton.classList.add("active");
         displayWords(data.data);
     })
 }
