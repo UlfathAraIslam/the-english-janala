@@ -11,7 +11,10 @@ navbar.style.display= "none";
 vocabulary.style.display = "none";
 faq.style.display = "none";
 
-getStartedBtn.addEventListener("click",function(){
+// get started btn
+
+getStartedBtn.addEventListener("click",function(event){
+    event.preventDefault();
     const username = nameInput.value.trim();
     const password = passwordInput.value;
 
@@ -30,6 +33,15 @@ getStartedBtn.addEventListener("click",function(){
     navbar.style.display = "flex";
     vocabulary.style.display = "block";
     faq.style.display = "block"
+})
+
+// logout btn
+
+const logoutBtn = document.getElementById("logout-btn");
+logoutBtn.addEventListener("click",function(){
+navbar.style.display= "none";
+vocabulary.style.display = "none";
+faq.style.display = "none";
 })
 // remove active class
 function removeActiveClass(){
