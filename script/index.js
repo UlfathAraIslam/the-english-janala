@@ -14,7 +14,7 @@ function displayLessons(lessons) {
   for (let lesson of lessons) {
     const lessonDiv = document.createElement("div");
     lessonDiv.innerHTML = `
-        <li class="btn btn-outline btn-primary group">
+        <li onclick="loadSelectedLessonWords(${lesson.level_no})" class="btn btn-outline btn-primary group">
             <a href="#vocabulary"> <i class="fa-solid fa-book-open text-indigo-800 group-hover:text-white"></i> Lesson-${lesson.level_no}</a>
           </li>
         `;
@@ -31,10 +31,12 @@ function loadWords() {
     });
 }
 // {id: 1, level: 3, word: 'Abundant', meaning: null, pronunciation: 'অবানডান্ট'}
+
+// display all words
 function displayWords(words) {
   const wordsContainer = document.getElementById("words-container");
+  wordsContainer.innerHTML = '';
   words.forEach((word) => {
-    console.log(word);
     const wordCard = document.createElement("div");
     wordCard.innerHTML = `
         <div class="card bg-base-100 shadow-sm h-full">
@@ -57,5 +59,15 @@ function displayWords(words) {
     wordsContainer.append(wordCard);
   });
 }
+// selected Lesson Words
+const loadSelectedLessonWords=(id)=>{
+    const url= `https://openapi.programming-hero.com/api/level/${id}`;
+    console.log(url);
+    fetch(url)
+    .then((res)=>res.json())
+    .then((data)=>{
+        displayWords(data.data);
+    })
+}
 loadLessons();
-loadWords();
+// loadWords();
