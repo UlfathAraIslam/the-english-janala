@@ -1,8 +1,37 @@
-//  hide everything on landing except the Banner and Footer
-document.getElementById("nav").style.display="none";
-document.getElementById("vocabulary").style.display="none";
-document.getElementById("faq").style.display="none";
+const getStartedBtn = document.getElementById("get-started-btn");
+const nameInput = document.getElementById("name");
+const passwordInput = document.getElementById("password");
+const banner = document.getElementById("banner");
+const navbar = document.getElementById("nav");
+const vocabulary = document.getElementById("vocabulary");
+const faq = document.getElementById("faq");
 
+// Initially hide sections except banner and footer
+navbar.style.display= "none";
+vocabulary.style.display = "none";
+faq.style.display = "none";
+
+getStartedBtn.addEventListener("click",function(){
+    const username = nameInput.value.trim();
+    const password = passwordInput.value;
+
+    if(!username){
+        alert("Please enter your name");
+        return;
+    }
+    if(password !== "123456"){
+        alert("Incorrect password!");
+        return;
+    }
+    else{
+        alert("Login successful!")
+    }
+    banner.style.display = "none";
+    navbar.style.display = "flex";
+    vocabulary.style.display = "block";
+    faq.style.display = "block"
+})
+// remove active class
 function removeActiveClass(){
     const activeButtons = document.getElementsByClassName("active");
     for(let btn of activeButtons){
