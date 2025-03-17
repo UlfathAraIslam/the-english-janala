@@ -36,6 +36,14 @@ function loadWords() {
 function displayWords(words) {
   const wordsContainer = document.getElementById("words-container");
   wordsContainer.innerHTML = '';
+  if(words.length == 0){
+    wordsContainer.innerHTML=`
+    <div class="col-span-full text-center space-y-5 bg-stone-100 p-5">
+            <p class="text-xs text-stone-600">এই lesson-এ এখনো কোনো vocbulary যোগ করা হয়নি</p>
+            <p class="text-2xl font-medium">Next lesson-এ যান।</p>
+          </div>
+    `
+  }
   words.forEach((word) => {
     const wordCard = document.createElement("div");
     wordCard.innerHTML = `
