@@ -16,9 +16,8 @@ English Janala is an interactive vocabulary learning platform that allows users 
 
 - **Arrow Functions** – Used for cleaner and concise function expressions.
 - **Template Literals** – Used for dynamic HTML generation.
-- **Destructuring** – Extracts values from API responses efficiently.
 - **Promises & Fetch API** – Handles asynchronous data fetching.
-- **Modules (if applicable)** – Organized code using JavaScript modules.
+
 
 ## Live Project
 
